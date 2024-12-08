@@ -2,7 +2,7 @@ group 'com.byneapp.flutter_config'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.7.20'
+    ext.kotlin_version = "1.8.10" // Ensure compatibility with JVM target 17
     repositories {
         google()
         mavenCentral()
@@ -25,19 +25,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+    compileSdkVersion 33  // Ensure this is specified
     namespace "com.byneapp.flutter_config"
-    compileSdkVersion 29
 
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
+        targetSdkVersion 33
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    lintOptions {
-        disable 'InvalidPackage'
-    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -46,6 +42,14 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
 }
 
 dependencies {
